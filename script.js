@@ -253,7 +253,7 @@ const calcAverageHumanAge = function (ages) {
   console.log(average);
 };
 const ages = [5, 2, 4, 1, 15, 8, 3];
-calcAverageHumanAge(ages);
+// calcAverageHumanAge(ages);
 
 const calcAverageHumanAgee = ages =>
   ages
@@ -261,4 +261,4 @@ const calcAverageHumanAgee = ages =>
     .filter(age => age >= 18)
     .reduce((acc, val, i, arr) => acc + val / arr.length, 0);
 
-console.log(calcAverageHumanAgee(ages));
+// console.log(calcAverageHumanAgee(ages));
