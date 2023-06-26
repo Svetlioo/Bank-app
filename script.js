@@ -57,9 +57,10 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
   containerMovements.innerHTML = '';
-  movements.forEach(function (mov, i) {
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+  movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
     const html = `
     <div class="movements__row">
@@ -188,6 +189,17 @@ btnClose.addEventListener('click', function (e) {
   inputCloseUsername.value = inputClosePin.value = '';
 });
 
+let sorted = false;
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+  if (!sorted) {
+    displayMovements(currentAccount.movements, true);
+    sorted = true;
+  } else {
+    displayMovements(currentAccount.movements, false);
+    sorted = false;
+  }
+});
 // console.log(accounts);
 // const eurToUsd = 1.1;
 // const movements = account1.movements;
@@ -288,3 +300,20 @@ const calcAverageHumanAgee = ages =>
     .reduce((acc, val, i, arr) => acc + val / arr.length, 0);
 
 // console.log(calcAverageHumanAgee(ages));
+
+// const allBalance = accounts
+//   .map(acc => acc.movements)
+//   .flat()
+//   .reduce((acc, mov) => acc + mov, 0);
+
+const allBalance = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(allBalance);
+
+const numbers = [33, 24, 71, 26, 149, -200, 300, 100, -25];
+console.log(numbers.slice().sort((a, b) => a - b));
+console.log(numbers);
+
+const z = Array.from({ length: 500 }, () => Math.floor(Math.random() * 101));
+console.log(z);
